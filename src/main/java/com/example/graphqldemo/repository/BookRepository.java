@@ -1,6 +1,7 @@
 package com.example.graphqldemo.repository;
 
 import com.example.graphqldemo.model.Book;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,9 +15,12 @@ import java.util.Optional;
  * @author Rustam Bikiteev
  */
 public interface BookRepository extends JpaRepository<Book, Long> {
-    @Query("SELECT b FROM Book b JOIN b.authors a WHERE a.id = :authorId")
-    List<Book> getBooksByAuthorId(@Param("authorId") Long authorId);
+    @Query("SELECT b FROM Book b JOIN fetch b.authors a WHERE a.name = :authorName")
+    List<Book> getBooksByAuthorId(@Param("authorName") String authorName);
 
     Optional<Book> findByTitle(String title);
+
+    @EntityGraph(attributePaths = {"authors"})
+    List<Book> findAll();
 
 }

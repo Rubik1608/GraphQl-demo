@@ -28,8 +28,8 @@ public class QueryService {
         return author;
     }
 
-    public List<Book> getBooksByAuthor(Long authorId){
-       List<Book> books = bookRepository.getBooksByAuthorId(authorId);
+    public List<Book> getBooksByAuthor(String authorName){
+       List<Book> books = bookRepository.getBooksByAuthorId(authorName);
        log.debug("books: {}", books);
        return books;
     }
