@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: graphql-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: book_author
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
