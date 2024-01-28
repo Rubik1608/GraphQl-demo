@@ -14,8 +14,8 @@ import java.util.Optional;
  * @author Rustam Bikiteev
  */
 public interface BookRepository extends JpaRepository<Book, Long> {
-    @Query("SELECT b FROM Book b JOIN b.authors a WHERE a.id = :authorId")
-    List<Book> getBooksByAuthorId(@Param("authorId") Long authorId);
+    @Query("SELECT b FROM Book b JOIN b.authors a WHERE a.name = :authorName")
+    List<Book> getBooksByAuthorId(@Param("authorName") String authorName);
 
     Optional<Book> findByTitle(String title);
 

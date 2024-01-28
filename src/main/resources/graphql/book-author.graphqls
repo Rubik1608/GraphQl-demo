@@ -16,7 +16,7 @@ type Mutation {
 }
 
 type Query {
-    getBooksByAuthor(authorId: ID!): [Book]!
+    getBooksByAuthor(authorName: String!): [Book]!
     getAllBooks: [Book]!
     getAuthor(name: String!): Author!
 }

@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * MutationService.
@@ -31,7 +33,7 @@ public class MutationService {
             List<Book> books = bookTitles.stream()
                     .map(title -> bookRepository.findByTitle(title)
                             .orElse(bookRepository.save(new Book().setTitle(title))))
-                    .toList();
+                    .collect(Collectors.toList());
             author.setBooks(books);
         }
 
@@ -47,10 +49,16 @@ public class MutationService {
             List<Author> authors = authorNames.stream()
                     .map(name -> authorRepository.findByName(name)
                             .orElse(authorRepository.save(new Author().setName(name))))
-                    .toList();
+                    .collect(Collectors.toList());
             book.setAuthors(authors);
         }
         log.debug("book: {}", book);
+        checkBookDuplicate(book);
         return bookRepository.save(book);
+    }
+
+    private void checkBookDuplicate(Book book) {
+        if (!bookRepository.findByTitle(book.getTitle()).isEmpty() && bookRepository.findByTitle(book.getTitle()).get().equals(book)){
+        }
     }
 }
