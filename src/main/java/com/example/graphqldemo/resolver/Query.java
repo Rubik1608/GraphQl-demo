@@ -2,8 +2,6 @@ package com.example.graphqldemo.resolver;
 
 import com.example.graphqldemo.model.Author;
 import com.example.graphqldemo.model.Book;
-import com.example.graphqldemo.repository.AuthorRepository;
-import com.example.graphqldemo.repository.BookRepository;
 import com.example.graphqldemo.service.QueryService;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import graphql.scalars.ExtendedScalars;
@@ -12,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Query.
@@ -32,8 +29,8 @@ public class Query implements GraphQLQueryResolver {
         return service.getAuthor(name);
     }
 
-    public List<Book> getBooksByAuthor(Long authorId){
-        return service.getBooksByAuthor(authorId);
+    public List<Book> getBooksByAuthor(String authorName){
+        return service.getBooksByAuthor(authorName);
     }
 
     public List<Book> getAllBooks(){
