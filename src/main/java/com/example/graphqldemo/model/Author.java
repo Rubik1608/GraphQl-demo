@@ -30,6 +30,7 @@ public class Author {
     @Column(name = "name", unique = true)
     private String name;
 
+
     @ManyToMany()
     @JoinTable(
             name = "book_author",
